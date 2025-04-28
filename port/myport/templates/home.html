@@ -176,10 +176,12 @@
             margin-right: 100px;
           }
           .header{
-            text-align: left;
+           position: absolute;
+              top: 150px;
+               right: 50px;
             font-family: 'Orbitron', sans-serif;
           }
-          button{
+          .btns{
             background-color:purple;
             color: white;
             padding: 15px 32px;
@@ -190,10 +192,31 @@
             cursor: pointer;
             border: 2px solid white;
             border-radius: 20px;
+            position: relative;
+            left: 5px;
           }
-            button:hover{
+            .btns:hover{
                 background-color: white;
                 color: purple;
+                transition: 0.3s ease;
+            }
+            .btns1{
+                background-color:white;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border: 2px solid white;
+                border-radius: 20px;
+                position: relative;
+                left: 15px;
+            }
+            .btns1:hover{
+                background-color: purple;
+                color: black;;
                 transition: 0.3s ease;
             }
     </style>
@@ -222,6 +245,8 @@
         <h1>Hello, this is Govind!</h1>
         <h4>TEXT CONTENT TO BE ADDED LATER</h4>
         <button type="submit" class = "btns" id="btns"><b>My projects</b></button>
+        <button type="submit" class = "btns1" id="btns1"><b>Contact Me</b></button>
+
     </div>
 </body>
 
@@ -230,11 +255,14 @@
   const logo = document.querySelector(".logo");
   const rocket = document.getElementById("rocket");
   const proj = document.getElementById("btns");
+  const contact = document.getElementById("btns1");
 
   proj.onclick = function() {
     window.location.href = "/projects/";
   };
-  
+    contact.onclick = function() {
+        window.location.href = "/contact_us/";
+    };
   function triggerFloatIn() {
     logo.classList.remove("float-in");
     void logo.offsetWidth;

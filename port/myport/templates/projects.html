@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">  
+    <head>
+        <title>My Projects/title>
+    </head?>
+    <body>
+        <div class="navbar">
+            <div class="logo">My Projects</div>
+            <div class="menu">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'projects' %}">Projects</a>
+            </div>
+        </div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
