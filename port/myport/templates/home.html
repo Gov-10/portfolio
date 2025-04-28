@@ -175,7 +175,27 @@
           .pos {
             margin-right: 100px;
           }
-      
+          .header{
+            text-align: left;
+            font-family: 'Orbitron', sans-serif;
+          }
+          button{
+            background-color:purple;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid white;
+            border-radius: 20px;
+          }
+            button:hover{
+                background-color: white;
+                color: purple;
+                transition: 0.3s ease;
+            }
     </style>
 </head>
 <body>
@@ -198,9 +218,10 @@
             </button>
           </div>
         </nav>
-
-    <div id="content">
-    <h1>Hello, I am Govind!</h1>
+    <div id="heading" class="header">
+        <h1>Hello, this is Govind!</h1>
+        <h4>TEXT CONTENT TO BE ADDED LATER</h4>
+        <button type="submit" class = "btns" id="btns"><b>My projects</b></button>
     </div>
 </body>
 
@@ -208,7 +229,11 @@
     const btn = document.getElementById("themeToggle");
   const logo = document.querySelector(".logo");
   const rocket = document.getElementById("rocket");
-  
+  const proj = document.getElementById("btns");
+
+  proj.onclick = function() {
+    window.location.href = "/projects/";
+  };
   
   function triggerFloatIn() {
     logo.classList.remove("float-in");
@@ -222,6 +247,8 @@
   
     document.getElementById("modes").textContent =
       document.body.classList.contains("dark") ? "dark mode" : "";
+    document.getElementById("heading").style.color =
+      document.body.classList.contains("dark") ? "cyan" : "black";
   
     rocket.textContent = document.body.classList.contains("dark") ? "🌙" : "🚀";
   
