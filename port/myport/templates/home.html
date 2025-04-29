@@ -1,291 +1,126 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-        body.light{
-            background: url("{% static 'background.gif' %}") no-repeat center center fixed;
-            background-size: cover;
+      body.light {
+        background: url("{% static 'background.gif' %}") no-repeat center center fixed;
+        background-size: cover;
+      }
+      body.dark {
+        background: url("{% static 'dark-bg.gif' %}") no-repeat center center fixed;
+        background-size: cover;
+      }
+      .logo.float-in {
+        animation: floatIn 1s ease-in-out;
+      }
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
         }
-        body.dark{
-            background: url("{% static 'dark-bg.gif' %}") no-repeat center center fixed;
-            background-size: cover;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .navbar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(12px);
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border-bottom: 2px solid #ccc;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-          }
-          .dark .navbar {
-            background: rgba(0, 0, 40, 0.4);
-            border-bottom: 2px solid cyan;
-          }
-      
-          .logo {
-            font-size: 24px;
-            font-family: 'Orbitron', sans-serif;
-            color: #000;
-          }
-          .dark .logo {
-            color: cyan;
-            text-shadow: 0 0 10px cyan;
-            animation: neon-glow 1.5s infinite alternate;
-          }
-      
-          @keyframes neon-glow {
-            0% { box-shadow: 0 0 10px cyan; }
-            100% { box-shadow: 0 0 30px cyan; }
-          }
-      
-      
-          @keyframes floatIn {
-            from {
-              opacity: 0;
-              transform: translateY(-20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-      
-          .logo.float-in {
-            animation: floatIn 1.0s ease;
-          }
-          .element {
-            font-size: 18px;
-            font-family: 'Orbitron', sans-serif;
-            margin: 0 10px;
-            text-decoration: none;
-            transition: 0.3s ease;
-            position: relative;
-            padding: 6px 10px;
-          }
-      
-          .element:hover {
-            transform: scale(1.1);
-          }
-      
-          .dark .element {
-            color: cyan;
-            text-shadow: 0 0 10px cyan;
-          }
-      
-          .element::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            left: 50%;
-            bottom: -5px;
-            background: red;
-            transition: width 0.3s ease, left 0.3s ease;
-          }
-      
-          .element:hover::after {
-            width: 100%;
-            left: 0;
-          }
-      
-          .dark .element::after {
-            background: cyan;
-          }
-          .dark .element.float-in{
-            animation: floatIn 1.0s ease;
-          }
-
-          .toggle {
-            width: 80px;
-            height: 80px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            overflow: hidden;
-            transition: background 0.4s, transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-          }
-      
-          .toggle:hover {
-            transform: scale(1.25);
-            background: #ddd;
-          }
-      
-          .rocket-wrapper {
-            position: relative;
-            width: 50px;
-            height: 50px;
-          }
-      
-          .rocket-outline {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: red;
-            border-radius: 50%;
-            filter: blur(8px);
-            opacity: 0.7;
-            z-index: 0;
-          }
-      
-          .rocket {
-            position: absolute;
-            font-size: 32px;
-            z-index: 1;
-            transition: transform 1s ease;
-          }
-      
-          .dark .rocket {
-            transform: translateY(-120px);
-          }
-      
-          .dark .rocket-outline {
-            background: blue;
-          }
-      
-          .dark .content,
-          .dark #modes {
-            color: cyan;
-          }
-      
-          #modes {
-            max-width: 70px;
-            margin: 0;
-            font-size: 14px;
-            font-family: 'Orbitron', sans-serif;
-          }
-      
-          .pos {
-            margin-right: 100px;
-          }
-          .header{
-           position: absolute;
-              top: 150px;
-               right: 50px;
-            font-family: 'Orbitron', sans-serif;
-          }
-          .btns{
-            background-color:purple;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-            border: 2px solid white;
-            border-radius: 20px;
-            position: relative;
-            left: 5px;
-          }
-            .btns:hover{
-                background-color: white;
-                color: purple;
-                transition: 0.3s ease;
-            }
-            .btns1{
-                background-color:white;
-                color: black;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                cursor: pointer;
-                border: 2px solid white;
-                border-radius: 20px;
-                position: relative;
-                left: 15px;
-            }
-            .btns1:hover{
-                background-color: purple;
-                color: black;;
-                transition: 0.3s ease;
-            }
+      }
     </style>
-</head>
-<body>
-    <body class="light">
-        <nav class="navbar">
-          <p id="modes"></p>
-          <a href="/" class="element">Home</a>
-          <a href="/about_us/" class="element">About us</a>
-          <a href="/chat/" class="element">Chatbot</a>
-          <a href="/projects/" class="element">Projects</a>
-          <a href  ="/contact_us/" class="element">Contact us</a>
-          <a href= "/skills/" class="element">Skills</a>
-      
-          <div class="pos">
-            <button id="themeToggle" class="toggle">
-              <div class="rocket-wrapper">
-                <div class="rocket-outline"></div>
-                <div class="rocket" id="rocket">🚀</div>
-              </div>
-            </button>
+  </head>
+  <body class="light font-[Orbitron] transition-colors duration-500">
+    <nav
+      class="navbar flex flex-wrap justify-between items-center p-6 bg-white/30 dark:bg-blue-950/40 backdrop-blur-md rounded-b-2xl shadow-lg border-b-2 border-gray-300 dark:border-cyan-400 sticky top-0 z-50"
+    >
+      <p id="modes" class="text-sm font-semibold text-gray-700 dark:text-cyan-300"></p>
+      <div class="flex flex-wrap gap-6 items-center">
+        <a href="/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Home</a>
+        <a href="/about_us/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">About Us</a>
+        <a href="/chat/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Chatbot</a>
+        <a href="/projects/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Projects</a>
+        <a href="/contact_us/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Contact Us</a>
+        <a href="/skills/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Skills</a>
+      </div>
+      <div class="mr-12">
+        <button
+          id="themeToggle"
+          class="w-16 h-16 rounded-full bg-gray-100 hover:bg-gray-300 dark:bg-slate-700 dark:hover:bg-slate-600 flex items-center justify-center shadow-lg transform transition-transform hover:scale-125"
+        >
+          <div class="relative w-10 h-10">
+            <div class="absolute w-full h-full bg-red-500 rounded-full blur-sm opacity-70 dark:bg-blue-500"></div>
+            <div class="absolute w-full h-full text-2xl" id="rocket">🚀</div>
           </div>
-        </nav>
-    <div id="heading" class="header">
-        <h1>Hello, this is Govind!</h1>
-        <h4>TEXT CONTENT TO BE ADDED LATER</h4>
-        <button type="submit" class = "btns" id="btns"><b>My projects</b></button>
-        <button type="submit" class = "btns1" id="btns1"><b>Contact Me</b></button>
+        </button>
+      </div>
+    </nav>
 
+    <div
+      id="heading"
+      class="header absolute top-[150px] right-[50px] w-[500px] h-[500px] text-black dark:text-cyan-400 transition-colors duration-300"
+    >
+      <h1 class="text-4xl font-bold mb-4 animate-fadeInUp">Hello, this is Govind!</h1>
+      <h4 class="text-lg mb-8 animate-fadeInUp">I am a full stack developer based in Nagpur, India. I specialize in Django framework</h4>
+      <button
+        type="submit"
+        class="btns bg-purple-700 text-white px-6 py-3 rounded-full hover:bg-white hover:text-purple-700 border-2 border-white transition-all duration-300 shadow-lg"
+        id="btns"
+      >
+        <b>My Projects</b>
+      </button>
+      <button
+        type="submit"
+        class="btns1 bg-white text-black px-6 py-3 rounded-full hover:bg-purple-700 hover:text-black border-2 border-white transition-all duration-300 ml-4 shadow-lg"
+        id="btns1"
+      >
+        <b>Contact Me</b>
+      </button>
     </div>
-</body>
 
-<script>
-    const btn = document.getElementById("themeToggle");
-  const logo = document.querySelector(".logo");
-  const rocket = document.getElementById("rocket");
-  const proj = document.getElementById("btns");
-  const contact = document.getElementById("btns1");
+    <script>
+      const btn = document.getElementById("themeToggle");
+      const logo = document.querySelector(".logo");
+      const rocket = document.getElementById("rocket");
+      const proj = document.getElementById("btns");
+      const contact = document.getElementById("btns1");
 
-  proj.onclick = function() {
-    window.location.href = "/projects/";
-  };
-    contact.onclick = function() {
+      proj.onclick = function () {
+        window.location.href = "/projects/";
+      };
+      contact.onclick = function () {
         window.location.href = "/contact_us/";
-    };
-  function triggerFloatIn() {
-    logo.classList.remove("float-in");
-    void logo.offsetWidth;
-    logo.classList.add("float-in");
-  }
-  
-  btn.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    document.body.classList.toggle("light");
-  
-    document.getElementById("modes").textContent =
-      document.body.classList.contains("dark") ? "dark mode" : "";
-    document.getElementById("heading").style.color =
-      document.body.classList.contains("dark") ? "cyan" : "black";
-  
-    rocket.textContent = document.body.classList.contains("dark") ? "🌙" : "🚀";
-  
-    triggerFloatIn();
-  });
-  
-  window.addEventListener("DOMContentLoaded", () => {
-    triggerFloatIn();
-  });
-  </script>
-   
+      };
+
+      function triggerFloatIn() {
+        logo?.classList.remove("float-in");
+        void logo?.offsetWidth;
+        logo?.classList.add("float-in");
+      }
+
+      btn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        document.body.classList.toggle("light");
+
+        document.getElementById("modes").textContent = document.body.classList.contains("dark")
+          ? "dark mode"
+          : "";
+
+        document.getElementById("heading").style.color = document.body.classList.contains("dark")
+          ? "cyan"
+          : "black";
+        document.body.style.color = document.body.classList.contains("dark")
+          ? "cyan"
+          : "black";
+        rocket.textContent = document.body.classList.contains("dark") ? "🌙" : "🚀";
+
+        triggerFloatIn();
+      });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        triggerFloatIn();
+      });
+    </script>
+  </body>
 </html>

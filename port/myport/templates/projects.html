@@ -1,19 +1,126 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">  
-    <head>
-        <title>My Projects/title>
-    </head?>
-    <body>
-        <div class="navbar">
-            <div class="logo">My Projects</div>
-            <div class="menu">
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'projects' %}">Projects</a>
-            </div>
-        </div>
-        <div class="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </body>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Projects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font for fancy look -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" />
+
+    <!-- Tailwind Custom Config -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              fancy: ['Orbitron', 'sans-serif'],
+            },
+            colors: {
+              primary: '#1e293b',
+              accent: '#0ea5e9',
+              darkbg: '#0f172a',
+              bg: '#f8fafc',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              zoomIn: {
+                '0%': { opacity: 0, transform: 'scale(0.8)' },
+                '100%': { opacity: 1, transform: 'scale(1)' },
+              },
+              pulseGlow: {
+                '0%, 100%': { boxShadow: '0 0 0px #0ea5e9' },
+                '50%': { boxShadow: '0 0 20px #0ea5e9' },
+              },
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 1s ease-out forwards',
+              zoomIn: 'zoomIn 0.8s ease-out forwards',
+              pulseGlow: 'pulseGlow 2s ease-in-out infinite',
+            },
+          },
+        },
+      }
+    </script>
+</head>
+
+<body class="bg-bg dark:bg-darkbg text-gray-900 dark:text-white font-sans min-h-screen relative">
+
+  <!-- Accent background effect -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-white to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
+
+  <!-- Header/Navbar -->
+  <header class="sticky top-0 z-50 bg-white/80 dark:bg-darkbg/80 backdrop-blur-xl shadow-lg animate-fadeInUp">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <h1 class="text-4xl font-fancy text-accent tracking-wide animate-pulseGlow">
+        My Projects 🚀
+      </h1>
+      <nav class="hidden md:flex space-x-8 text-lg font-semibold">
+        <a href="{% url 'home' %}" class="hover:text-accent relative group">
+          Home
+          <span class="block h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+        <a href="{% url 'projects' %}" class="hover:text-accent relative group">
+          Projects
+          <span class="block h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Section with Entrance Animations -->
+  <main class="max-w-6xl mx-auto px-6 py-20 space-y-12">
+
+    <!-- Animated Intro Box -->
+    <section class="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-2xl animate-zoomIn transition hover:shadow-blue-300 dark:hover:shadow-blue-900">
+      {% block content %}
+      <h2 class="text-3xl font-fancy text-accent mb-4">Welcome to My Portfolio</h2>
+      <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+        This is where I showcase my passion, my projects, and my potential.
+        Scroll down to see what I've built. 🚀
+      </p>
+      {% endblock %}
+    </section>
+
+    <!-- Add Flashy Cards as Needed -->
+    <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-xl transform transition hover:scale-105 hover:shadow-accent/40 animate-fadeInUp delay-100 hover:cursor-pointer">
+        <h3 class="text-xl font-bold text-accent mb-2">⚡ Project 1</h3>
+        <p class="text-gray-600 dark:text-gray-300">A modern web app using Django and Tailwind.</p>
+      </div>
+      <div class="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-xl transform transition hover:scale-105 hover:shadow-accent/40 animate-fadeInUp delay-200 hover:cursor-pointer">
+        <h3 class="text-xl font-bold text-accent mb-2">🔥 Project 2</h3>
+        <p class="text-gray-600 dark:text-gray-300">Interactive chatbot powered by AI and WebSockets.</p>
+      </div>
+      <div class="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-xl transform transition hover:scale-105 hover:shadow-accent/40 animate-fadeInUp delay-300 hover:cursor-pointer">
+        <h3 class="text-xl font-bold text-accent mb-2">🌐 Project 3</h3>
+        <p class="text-gray-600 dark:text-gray-300">A real-time dashboard using React & Django Channels.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 dark:text-gray-400 py-10 animate-fadeInUp delay-500">
+    <p class="mb-2">© 2025 My Projects | Designed with 💻, ☕ & Tailwind CSS</p>
+    <div class="flex justify-center space-x-4">
+      <a href="#" class="hover:text-accent transition">GitHub</a>
+      <a href="#" class="hover:text-accent transition">LinkedIn</a>
+      <a href="#" class="hover:text-accent transition">Contact</a>
+    </div>
+  </footer>
+
+  <!-- Scroll To Top Button -->
+  <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+    class="fixed bottom-6 right-6 bg-accent text-white p-3 rounded-full shadow-lg hover:bg-sky-500 focus:outline-none transition duration-300"
+    aria-label="Scroll to top">
+    ↑
+  </button>
+</body>
 </html>
