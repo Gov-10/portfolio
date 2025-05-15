@@ -5,20 +5,329 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Orbitron', sans-serif;
+      }
+
+      html, body {
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        transition: background 0.5s;
+        /* Ensure there's enough content to scroll */
+        min-height: 120vh;
+      }
+
+      .page-container {
+        position: relative;
+        min-height: 100vh;
+      }
+
       body.light {
-        background: url("{% static 'background.gif' %}") no-repeat center center fixed;
+        background: url("{% static 'day.gif' %}") no-repeat center center fixed;
         background-size: cover;
       }
+
       body.dark {
-        background: url("{% static 'dark-bg.gif' %}") no-repeat center center fixed;
+        background: black;
         background-size: cover;
       }
+
+      .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: background-color 0.5s;
+        width: 100%;
+      }
+
+      body.light .navbar {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-bottom: 2px solid #d1d5db;
+        backdrop-filter: blur(8px);
+      }
+
+      body.dark .navbar {
+        background-color: rgba(23, 37, 84, 0.4);
+        border-bottom: 2px solid #22d3ee;
+        backdrop-filter: blur(8px);
+      }
+
+      #modes {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      body.light #modes {
+        color: #374151;
+      }
+
+      body.dark #modes {
+        color: #22d3ee;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .nav-link {
+        font-size: 1.125rem;
+        text-decoration: none;
+        transition: transform 0.3s;
+        position: relative;
+      }
+
+      .nav-link:hover {
+        transform: scale(1.1);
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        left: 50%;
+        bottom: -4px;
+        transition: width 0.3s, left 0.3s;
+      }
+
+      body.light .nav-link {
+        color: black;
+      }
+
+      body.dark .nav-link {
+        color: #22d3ee;
+      }
+
+      body.light .nav-link::after {
+        background-color: #ef4444;
+      }
+
+      body.dark .nav-link::after {
+        background-color: #22d3ee;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+      }
+
+      #themeToggle {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transform: scale(1);
+        transition: transform 0.3s, background-color 0.3s;
+      }
+
+      body.light #themeToggle {
+        background-color: #f3f4f6;
+      }
+
+      body.dark #themeToggle {
+        background-color: #334155;
+      }
+
+      body.light #themeToggle:hover {
+        background-color: #d1d5db;
+      }
+
+      body.dark #themeToggle:hover {
+        background-color: #475569;
+      }
+
+      #themeToggle:hover {
+        transform: scale(1.25);
+      }
+
+      .rocket-container {
+        position: relative;
+        width: 40px;
+        height: 40px;
+      }
+
+      .rocket-glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        filter: blur(4px);
+        opacity: 0.7;
+      }
+
+      body.light .rocket-glow {
+        background-color: #ef4444;
+      }
+
+      body.dark .rocket-glow {
+        background-color: #3b82f6;
+      }
+
+      .rocket {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .img-container {
+        margin: 20px;
+        display: inline-block;
+      }
+
+      .govind_img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px cyan;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+      }
+
+      .govind_img:hover {
+        box-shadow: 0 0 30px aqua, 0 0 50px lightblue;
+      }
+
+      .cont {
+        position: absolute;
+        top: 150px;
+        left: 275px;
+      }
+
+      .header {
+        position: absolute;
+        top: 250px;
+        right: 50px;
+        width: 600px;
+        height: 600px;
+        transition: color 0.3s;
+      }
+
+      body.light .header {
+        color: orange;
+      }
+
+      body.dark .header {
+        color: white;
+      }
+
+      .header h1 {
+        font-size: 2.25rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.8));
+      }
+
+      .header h1 span {
+        color: #38bdf8;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.8));
+      }
+
+      .header h4 {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.7));
+      }
+
+      .header h4 span {
+        font-weight: 600;
+        color: #c084fc;
+        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.7));
+      }
+
+      .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 9999px;
+        border: 2px solid white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .btn-primary {
+        background-color: #6d28d9;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: white;
+        color: #6d28d9;
+      }
+
+      .btn-secondary {
+        background-color: white;
+        color: black;
+      }
+      .btn-tertiary{
+        background-color: cyan;
+        color: black;
+      }
+      .btn-tertiary:hover{
+        background-color: #6d28d9;
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #6d28d9;
+        color: white;
+      }
+
+      /* Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeInUp {
+        animation: fadeInUp 1s ease-out;
+      }
+
       .logo.float-in {
         animation: floatIn 1s ease-in-out;
       }
+
       @keyframes floatIn {
         from {
           opacity: 0;
@@ -31,52 +340,60 @@
       }
     </style>
   </head>
-  <body class="light font-[Orbitron] transition-colors duration-500">
-    <nav
-      class="navbar flex flex-wrap justify-between items-center p-6 bg-white/30 dark:bg-blue-950/40 backdrop-blur-md rounded-b-2xl shadow-lg border-b-2 border-gray-300 dark:border-cyan-400 sticky top-0 z-50"
-    >
-      <p id="modes" class="text-sm font-semibold text-gray-700 dark:text-cyan-300"></p>
-      <div class="flex flex-wrap gap-6 items-center">
-        <a href="/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Home</a>
-        <a href="/about_us/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">About Us</a>
-        <a href="/chat/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Chatbot</a>
-        <a href="/projects/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Projects</a>
-        <a href="/contact_us/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Contact Us</a>
-        <a href="/skills/" class="element text-lg hover:scale-110 transition-transform duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-1/2 after:bottom-[-4px] after:bg-red-500 dark:after:bg-cyan-400 hover:after:w-full hover:after:left-0 text-black dark:text-cyan-400">Skills</a>
+  <body class="light">
+    <div class="page-container">
+      <nav class="navbar">
+      <p id="modes"></p>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about_us/" class="nav-link">About Us</a>
+        <a href="/chat/" class="nav-link">Chatbot</a>
+        <a href="/projects/" class="nav-link">Projects</a>
+        <a href="/contact_us/" class="nav-link">Contact Us</a>
+        <a href="/skills/" class="nav-link">Skills</a>
       </div>
-      <div class="mr-12">
-        <button
-          id="themeToggle"
-          class="w-16 h-16 rounded-full bg-gray-100 hover:bg-gray-300 dark:bg-slate-700 dark:hover:bg-slate-600 flex items-center justify-center shadow-lg transform transition-transform hover:scale-125"
-        >
-          <div class="relative w-10 h-10">
-            <div class="absolute w-full h-full bg-red-500 rounded-full blur-sm opacity-70 dark:bg-blue-500"></div>
-            <div class="absolute w-full h-full text-2xl" id="rocket">🚀</div>
+      <div style="margin-right: 48px;">
+        <button id="themeToggle">
+          <div class="rocket-container">
+            <div class="rocket-glow"></div>
+            <div class="rocket" id="rocket">🚀</div>
           </div>
         </button>
       </div>
     </nav>
 
-    <div
-      id="heading"
-      class="header absolute top-[150px] right-[50px] w-[500px] h-[500px] text-black dark:text-cyan-400 transition-colors duration-300"
-    >
-      <h1 class="text-4xl font-bold mb-4 animate-fadeInUp">Hello, this is Govind!</h1>
-      <h4 class="text-lg mb-8 animate-fadeInUp">I am a full stack developer based in Nagpur, India. I specialize in Django framework</h4>
-      <button
-        type="submit"
-        class="btns bg-purple-700 text-white px-6 py-3 rounded-full hover:bg-white hover:text-purple-700 border-2 border-white transition-all duration-300 shadow-lg"
-        id="btns"
-      >
-        <b>My Projects</b>
-      </button>
-      <button
-        type="submit"
-        class="btns1 bg-white text-black px-6 py-3 rounded-full hover:bg-purple-700 hover:text-black border-2 border-white transition-all duration-300 ml-4 shadow-lg"
-        id="btns1"
-      >
-        <b>Contact Me</b>
-      </button>
+    <div>
+      <div class="cont">
+        <div class="img-container">
+          <img src="{% static 'govind_image.png' %}" alt="This is Govind" class="govind_img" onclick="openPopup()" />
+        </div>
+      </div>
+
+      <div id="heading" class="header">
+        <h1 class="animate-fadeInUp">
+          Hello, this is
+          <span>Govind!</span>
+        </h1>
+
+        <h4 class="animate-fadeInUp">
+          I am a full stack developer based in Nagpur, India.<br />
+          I specialize in the
+          <span>Django</span> framework.
+        </h4>
+
+        <div class="button-container">
+          <button type="button" class="btn btn-primary" id="btns">
+            <b>My Projects</b>
+          </button>
+          <button type="button" class="btn btn-secondary" id="btns1">
+            <b>Contact Me</b>
+          </button>
+          <button type="button" class="btn btn-tertiary" id="btns2">
+            <b>Download Resume</b>
+          </button>
+
+        </div>
+      </div>
     </div>
 
     <script>
@@ -86,6 +403,7 @@
       const proj = document.getElementById("btns");
       const contact = document.getElementById("btns1");
 
+      // Button redirects
       proj.onclick = function () {
         window.location.href = "/projects/";
       };
@@ -93,34 +411,33 @@
         window.location.href = "/contact_us/";
       };
 
+      // Logo animation function
       function triggerFloatIn() {
-        logo?.classList.remove("float-in");
-        void logo?.offsetWidth;
-        logo?.classList.add("float-in");
+        if (logo) {
+          logo.classList.remove("float-in");
+          void logo.offsetWidth;
+          logo.classList.add("float-in");
+        }
       }
 
+      // Theme toggle functionality
       btn.addEventListener("click", () => {
         document.body.classList.toggle("dark");
         document.body.classList.toggle("light");
 
-        document.getElementById("modes").textContent = document.body.classList.contains("dark")
-          ? "dark mode"
-          : "";
+        const isDark = document.body.classList.contains("dark");
+        document.getElementById("modes").textContent = isDark ? "dark mode" : "";
+      });
 
-        document.getElementById("heading").style.color = document.body.classList.contains("dark")
-          ? "cyan"
-          : "black";
-        document.body.style.color = document.body.classList.contains("dark")
-          ? "cyan"
-          : "black";
-        rocket.textContent = document.body.classList.contains("dark") ? "🌙" : "🚀";
-
+      // Apply float-in animation on page load
+      window.addEventListener("load", () => {
         triggerFloatIn();
       });
 
-      window.addEventListener("DOMContentLoaded", () => {
-        triggerFloatIn();
-      });
+      // Popup function
+      function openPopup() {
+        alert("Hello! That's me, Govind 😎");
+      }
     </script>
   </body>
 </html>
