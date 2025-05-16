@@ -24,7 +24,7 @@
         min-height: 100vh;
       }
       body.light {
-        background: url("{% static 'day.gif' %}") no-repeat center center fixed;
+        background: url("{% static 'forest.gif' %}") no-repeat center center fixed;
         background-size: cover;
       }
       body.dark {
@@ -197,6 +197,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
+        position: relative;
       }
       .btn {
         padding: 12px 24px;
@@ -246,6 +247,40 @@
           margin-top: 0;
         }
       }
+      .linkedin{
+        border-radius : 50%;
+        background-image : url("{%static 'linkedin.png'%}");
+        background-size: cover;
+        background-position: center;
+        border: none;
+        cursor: pointer;
+        width : 40px;
+        height: 40px;
+        display : inline-block;
+        position : absolute;
+        top: 60px;
+        right : 550px;
+      }
+      .git{
+        border-radius : 50%;
+        background-image : url("{%static 'github.png'%}");
+        background-size: cover;
+        background-position: center;
+        border: none;
+        cursor: pointer;
+        width : 35px;
+        height: 35px;
+        display : inline-block;
+        position : absolute;
+        top: 62px;
+        right : 475px;
+      }
+      .git:hover{
+        box-shadow: 0 0 30px aqua, 0 0 50px lightblue;
+      }
+      .linkedin:hover{
+        box-shadow: 0 0 30px aqua, 0 0 50px lightblue;
+      }
     </style>
   </head>
   <body class="light">
@@ -289,7 +324,12 @@
           </button>
           <button type="button" class="btn btn-tertiary" onclick="downloadResume()">
             <b>Download Resume</b>
+          </button><br><br>
+          <button type="button" class = "linkedin" onclick = "mylinkedin()">
           </button>
+          <button type="button" class = "git" onclick = "mygit()">
+          </button>
+
         </div>
       </div>
     </section>
@@ -297,7 +337,7 @@
     <section id="about-me">
       <div class="section-title">About Me</div>
       <div class="abtcon">
-        Hi! I'm Govind S
+        Hi, I am Govind S, from India. I am currently pursuing BTech at IIIT Nagpur. Go ahead and reach out to NITRO, the superbot, to know more about me!!
       </div>
     </section>
 
@@ -306,8 +346,8 @@
       <div class="projcon">
         <ul style="list-style:none; padding:0;">
           <li><b>Portfolio Website</b> – This very site, built with Django and custom CSS.</li>
-          <li><b>Chatbot App</b> – An AI-powered chatbot using Django and JavaScript.</li>
-          <li><b>ABC/b> –</li>
+          <li><b>Edugenie Website</b> – An AI-powered educational platform designed to cater the needs of both school students and college students</li>
+          <li><b>AvBro</b> –A flight ticket booking website, with unique and personalised features</li>
         </ul>
       </div>
     </section>
@@ -353,6 +393,13 @@
       // Popup function
       function openmail() {
         window.location.href = "mailto:govindsys1008@gmail.com";
+      }
+      function mylinkedin(){
+         window.open("https://www.linkedin.com/in/govind-s-1061a2314/", "_blank");
+      }
+      function mygit()
+      {
+        window.open("https://github.com/Gov-10", "_blank");
       }
     </script>
   </body>
