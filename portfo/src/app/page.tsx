@@ -31,7 +31,7 @@ export default function Home() {
                 <span className="text-emerald-400 cursor-blink">_</span>
               </h1>
               <span className="text-xs font-normal text-emerald-400 px-2.5 py-1 rounded bg-emerald-950/40 border border-emerald-900/50">
-                SRE / Platform Engineer
+                Backend dev with inclination towards SRE and Platform engineering
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs text-emerald-500 font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> online
